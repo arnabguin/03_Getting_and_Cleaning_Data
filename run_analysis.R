@@ -1,10 +1,10 @@
 library(plyr)
 
 ## Read training and test features from UCI data set
-Xtrain <- read.csv("./UCI/train/X_train.txt",sep=" ",header=FALSE)
-Xtest <- read.csv("./UCI/test/X_test.txt",sep=" ",header=FALSE)
+Xtrain <- read.table("./UCI/train/X_train.txt")
+Xtest <- read.table("./UCI/test/X_test.txt")
 ## Extract feature list
-Xfeatures <- read.csv("./UCI/features.txt",sep=" ",header=FALSE)
+Xfeatures <- read.table("./UCI/features.txt")
 
 ## Assign feature column names to training and test sets
 
@@ -18,12 +18,12 @@ Xtrain <- Xtrain[,grep ("std|mean",colnames(Xtrain))]
 Xtest  <- Xtest[,grep ("std|mean",colnames(Xtest))]
 
 # Read output classification training and test data
-Ytrain <- as.list(read.csv("./UCI/train/y_train.txt",sep=" ",header=FALSE))
-Ytest  <- as.list(read.csv("./UCI/test/y_test.txt",sep=" ",header=FALSE))
+Ytrain <- read.table("./UCI/train/y_train.txt")
+Ytest  <- read.table("./UCI/test/y_test.txt")
 
 # Read activity labels and augment training/test data by replacing indices with actual class string labels
 
-Yact <- read.csv("./UCI/activity_labels.txt",sep=" ",header=FALSE)
+Yact <- read.table("./UCI/activity_labels.txt")
 colnames(Yact) <- c("index","label")
 Yclassify <- Yact$label
 
@@ -39,8 +39,8 @@ testSet <- cbind(Xtest,Ytestclassify)
 
 ## Annotate subject as a separate column in the training/test data set
 
-Xtrainsubject <- read.csv("./UCI/train/subject_train.txt",header=FALSE,sep=" ")
-Xtestsubject <- read.csv("./UCI/test/subject_test.txt",header=FALSE,sep=" ")
+Xtrainsubject <- read.table("./UCI/train/subject_train.txt")
+Xtestsubject <- read.table("./UCI/test/subject_test.txt")
 colnames(Xtrainsubject) <- c("subject")
 colnames(Xtestsubject) <- c("subject")
 
